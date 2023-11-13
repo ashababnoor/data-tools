@@ -26,5 +26,9 @@ def json_to_markdown(json_file: str, output_file: str, prettify: bool = True) ->
     with open(output_file, 'w') as file:
         file.write(markdown_table)
 
-# Example Usage
-json_to_markdown('data/input.json', 'data/output.md')
+
+def main():
+    json_to_markdown('data/input.json', 'data/output.md')
+    
+if __name__ == "__main__":
+    main()

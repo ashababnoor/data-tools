@@ -19,14 +19,17 @@ def prettify_markdown_table(markdown_table):
 
     return pretty_table
 
-# Example usage
-markdown_input = """
-| Name  | Age | City    |
-|-------|-----|---------|
-| Alice | 25  | New York|
-| Bob   | 30  | London  |
-| Carol | 22  | Paris   |
-"""
+def main():
+    markdown_input = """
+    | Name  | Age | City    |
+    |-------|-----|---------|
+    | Alice | 25  | New York|
+    | Bob   | 30  | London  |
+    | Carol | 22  | Paris   |
+    """
 
-prettified_table = prettify_markdown_table(markdown_input)
-print(prettified_table)
+    prettified_table = prettify_markdown_table(markdown_input)
+    print(prettified_table)
+    
+if __name__ == "__main__":
+    main()
