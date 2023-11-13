@@ -6,6 +6,7 @@ def prettify_markdown_table(markdown_table):
 
     # Split each row into columns
     table_data = [row.split('|') for row in rows]
+    table_data.pop(1)
 
     # Remove leading and trailing whitespaces from each column
     table_data = [[col.strip() for col in row] for row in table_data]
@@ -21,6 +22,7 @@ def prettify_markdown_table(markdown_table):
 # Example usage
 markdown_input = """
 | Name  | Age | City    |
+|-------|-----|---------|
 | Alice | 25  | New York|
 | Bob   | 30  | London  |
 | Carol | 22  | Paris   |

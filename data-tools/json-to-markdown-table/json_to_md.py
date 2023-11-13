@@ -1,6 +1,7 @@
 import json
+from prettify_table import prettify_markdown_table
 
-def json_to_markdown(json_file, output_file):
+def json_to_markdown(json_file: str, output_file: str, prettify: bool = True) -> None:
     # Read JSON data from file
     with open(json_file, 'r') as file:
         data = json.load(file)
@@ -17,6 +18,9 @@ def json_to_markdown(json_file, output_file):
     for item in data:
         row = [str(item[header]) for header in headers]
         markdown_table += f"| {' | '.join(row)} |\n"
+        
+    if prettify:
+        markdown_table = prettify_markdown_table(markdown_table)
 
     # Write the markdown table to the output file
     with open(output_file, 'w') as file:
