@@ -7,10 +7,10 @@ def prettify_markdown_table(markdown_table):
 
     # Split each row into columns
     table_data = [row.split('|') for row in rows]
-    
+        
     rows_to_delete = []
     for index, row in enumerate(table_data):
-        if re.sub(r'^[a-zA-Z0-9]', "", row).strip() == "":
+        if re.sub(r'[^a-zA-Z0-9]', "", "".join(row)).strip() == "":
             rows_to_delete.append(index)
     
     for index in sorted(rows_to_delete, reverse=True):
