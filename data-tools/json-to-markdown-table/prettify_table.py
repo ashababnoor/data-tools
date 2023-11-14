@@ -1,4 +1,5 @@
 from tabulate import tabulate
+import re
 
 def prettify_markdown_table(markdown_table):
     # Split the input string into rows
@@ -6,7 +7,14 @@ def prettify_markdown_table(markdown_table):
 
     # Split each row into columns
     table_data = [row.split('|') for row in rows]
-    table_data.pop(1)
+    
+    rows_to_delete = []
+    for index, row in enumerate(table_data):
+        if re.sub(r'^[a-zA-Z0-9]', "", row).strip() == "":
+            rows_to_delete.append(index)
+    
+    for index in sorted(rows_to_delete, reverse=True):
+        table_data.pop(index)
 
     # Remove leading and trailing whitespaces from each column
     table_data = [[col.strip() for col in row] for row in table_data]
