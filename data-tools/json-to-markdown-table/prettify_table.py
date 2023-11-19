@@ -10,7 +10,25 @@ def prettify_markdown_table(markdown_table: str) -> str:
 
     Returns:
         str: Preffitified markdown table.
+        
+    Example:
+    ```
+    >>> prettify_markdown_table(markdown_input = \"\"\"
+        | Name  | Age | City    | 
+        |-------|-----|---------|   
+        | Alice | 25  | New York|   
+        | Bob   | 30  | London  |   
+        | Carol | 22  | Paris   |   
+    \"\"\")
+    
+    | Name   |   Age | City     |
+    |:-------|------:|:---------|
+    | Alice  |    25 | New York |
+    | Bob    |    30 | London   |
+    | Carol  |    22 | Paris    |
+    ```
     """
+    
     # Split the input string into rows
     rows = markdown_table.strip().split('\n')
 
