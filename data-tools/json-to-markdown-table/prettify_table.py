@@ -1,7 +1,16 @@
 from tabulate import tabulate
 import re
 
-def prettify_markdown_table(markdown_table):
+def prettify_markdown_table(markdown_table: str) -> str:
+    """
+    Prettify markdown table
+
+    Args:
+        markdown_table (str): The input markdown table that is to be prettified
+
+    Returns:
+        str: Preffitified markdown table.
+    """
     # Split the input string into rows
     rows = markdown_table.strip().split('\n')
 
