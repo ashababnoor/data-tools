@@ -2,6 +2,18 @@ import json
 from prettify_table import prettify_markdown_table
 
 def json_to_markdown(json_file: str, output_file: str, prettify: bool = True) -> None:
+    """
+    Convert schema information in JSON to Markdown table and save in file
+
+    Args:
+        json_file (str): Path of input file containing JSON schema data.
+        output_file (str): Path of output file where markdown data will be stored.
+        prettify (bool, optional): If True, markdown data is prettified. Defaults to True.
+
+    Raises:
+        ValueError: JSON input should be list of dictionaries.
+    """
+    
     # Read JSON data from file
     with open(json_file, 'r') as file:
         data = json.load(file)
