@@ -58,7 +58,7 @@ def compare_schemas(
         
         with open(uncommon_file, 'w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(["Column Name", "Schema", "Data Type"])
+            writer.writerow(["Column Name", "Data Type", "Schema"])
             writer.writerows(uncommon_columns)
     
     return common_columns, similar_columns, uncommon_columns
