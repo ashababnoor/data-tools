@@ -1,12 +1,26 @@
 from fuzzywuzzy import fuzz
 import json
 import csv
+import os
 
 
-def compare_schemas(schema1, schema2, save_in_file=True, common_file="common_columns.csv", similar_file="similar_columns.csv", uncommon_file="uncommon_columns.csv"):
+def compare_schemas(
+    schema1, 
+    schema2, 
+    save_in_file=True, 
+    common_file="common_columns.csv", 
+    similar_file="similar_columns.csv", 
+    uncommon_file="uncommon_columns.csv",
+    output_folder="output"
+):
     common_columns = []
     similar_columns = []
     uncommon_columns = []
+    
+    common_file = os.path.join(output_folder, common_file)
+    similar_file = os.path.join(output_folder, similar_file)
+    uncommon_file = os.path.join(output_folder, uncommon_file)
+    os.makedirs(os.path.dirname(common_file), exist_ok=True)
     
     for col1 in schema1:
         for col2 in schema2:
