@@ -2,6 +2,7 @@ import yaml
 import os
 from dataclasses import dataclass
 from typing import Dict, Any, Tuple
+from google.cloud.bigquery import SchemaField
 
 
 @dataclass
@@ -14,6 +15,10 @@ class Table:
     def get_tables_from_config(config_key: str, config_file_path: str = None) -> Tuple['Table']:
         config = Config(file_path=config_file_path)
         return config.get_tables(config_key)
+
+@dataclass
+class Schema(Table):
+    schema: list[SchemaField]
 
 
 class Config:
