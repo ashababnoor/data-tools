@@ -16,7 +16,7 @@ def compare_schemas(
     similar_file: str = "similar_columns.csv", 
     uncommon_file: str = "uncommon_columns.csv",
     output_folder: str = "output"
-) -> tuple:
+) -> tuple[list, list, list]:
     FUZZY_MATCH_RATIO: int = 80
     
     common_columns = []
@@ -72,7 +72,7 @@ def generate_summary(
     uncommon_columns: list,
     summary_file: str = "SUMMARY.md",
     output_folder: str = "output"
-):
+) -> None:
     summary_file = os.path.join(output_folder, summary_file)
     os.makedirs(os.path.dirname(summary_file), exist_ok=True)
     

@@ -11,11 +11,11 @@ class Table:
     dataset_id: str
     table_id: str
     
-    def get_table_id(self):
+    def get_table_id(self) -> str:
         return f"{self.project_id}.{self.dataset_id}.{self.table_id}"
     
     @staticmethod
-    def get_tables_from_config(config_key: str, config_file_path: str = None) -> Tuple['Table']:
+    def get_tables_from_config(config_key: str, config_file_path: str = None) -> Tuple['Table', 'Table']:
         config = Config(file_path=config_file_path)
         return config.get_tables(config_key)
 
@@ -82,7 +82,7 @@ class Config:
 
 
 def main():
-    config_key = "food_tables"
+    config_key = ""
     table1, table2 = Table.get_tables_from_config(config_key)
     
     print(f"{table1 = }")

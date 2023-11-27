@@ -5,7 +5,12 @@ import os
 
 
 def compare(config_key: str, output_folder: str = "output") -> None:
+    print(f"Performing schema comparison for config key: {config_key}")
     table1, table2 = Table.get_tables_from_config(config_key)
+    print(f"    Table 1: `{table1.get_table_id()}`")
+    print(f"    Table 2: `{table2.get_table_id()}`")
+    print()
+    
     schema1 = bigquery_client.get_schema(table1)
     schema2 = bigquery_client.get_schema(table2)
     
@@ -16,6 +21,8 @@ def compare(config_key: str, output_folder: str = "output") -> None:
     common_columns, similar_columns, uncommon_columns = outputs
     
     generate_summary(table1, table2, common_columns, similar_columns, uncommon_columns, output_folder=output_folder)
+    print("Schema comparison output saved in the following location:")
+    print(f"    {os.path.abspath(output_folder)}")
 
 
 def main():
