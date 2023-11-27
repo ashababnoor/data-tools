@@ -1,7 +1,7 @@
 from fuzzywuzzy import fuzz
 import csv
 import os
-from helper import Schema
+from helper import Table, Schema
 
 
 def compare_schemas(
@@ -50,3 +50,28 @@ def compare_schemas(
             writer.writerows(uncommon_columns)
     
     return common_columns, similar_columns, list(uncommon_columns)
+
+
+def generate_summary(
+    table1: Table, 
+    table2: Table,
+    common_columns: list,
+    similar_columns: list,
+    uncommon_columns: list,
+    summary_file: str = "SUMMARY.md",
+    output_folder: str = "output"
+):
+    summary_file = os.path.join(output_folder, summary_file)
+    os.makedirs(os.path.dirname(summary_file), exist_ok=True)
+    
+    with open(summary_file, 'w') as file:
+        file.write("# Schema Comparison Summary\n")
+        file.write("\n")
+        
+        file.write(f"Table 1: `{table1.get_table_id()}`  \n")
+        file.write(f"Table 2: `{table2.get_table_id()}`  \n")
+        file.write("\n")
+        
+        file.write(f"Number of common columns:   {len(common_columns)}  \n")
+        file.write(f"Number of similar columns:  {len(similar_columns)}  \n")
+        file.write(f"Number of uncommon columns: {len(uncommon_columns)}  \n")
