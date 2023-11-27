@@ -19,7 +19,7 @@ def compare(config_key: str, output_folder: str = "output") -> None:
 
 
 def main():
-    config_key = "food_tables"
+    config_key = ""
     compare(config_key)
 
 

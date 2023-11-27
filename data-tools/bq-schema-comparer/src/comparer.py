@@ -22,6 +22,7 @@ def compare_schemas(
     common_columns = []
     similar_columns = []
     uncommon_columns = []
+    non_uncommon_columns = []
     
     common_file = os.path.join(output_folder, common_file)
     similar_file = os.path.join(output_folder, similar_file)
@@ -32,12 +33,17 @@ def compare_schemas(
         for col2 in schema2.schema:
             if col1.name == col2.name and col1.field_type == col2.field_type:
                 common_columns.append((col1.name, col1.field_type))
+                non_uncommon_columns.append((col1.name, col1.field_type, "schema1"))
+                non_uncommon_columns.append((col2.name, col2.field_type, "schema2"))
+                
             elif col1.field_type == col2.field_type and fuzz.ratio(col1.name, col2.name) > FUZZY_MATCH_RATIO:
                 similar_columns.append((col1.name, col2.name, col1.field_type))
+                non_uncommon_columns.append((col1.name, col1.field_type, "schema1"))
+                non_uncommon_columns.append((col2.name, col2.field_type, "schema2"))
     
     # Find uncommon columns
     all_columns = set((col.name, col.field_type, "schema1") for col in schema1.schema) | set((col.name, col.field_type, "schema2") for col in schema2.schema)
-    uncommon_columns = all_columns - set(common_columns) - set(similar_columns)
+    uncommon_columns = list(all_columns - set(non_uncommon_columns))
     
     if save_in_file:
         with open(common_file, 'w', newline='') as file:
@@ -55,7 +61,7 @@ def compare_schemas(
             writer.writerow(["Column Name", "Schema", "Data Type"])
             writer.writerows(uncommon_columns)
     
-    return common_columns, similar_columns, list(uncommon_columns)
+    return common_columns, similar_columns, uncommon_columns
 
 
 def generate_summary(
