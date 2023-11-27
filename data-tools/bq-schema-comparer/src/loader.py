@@ -29,7 +29,16 @@ class Bigquery:
         
         # Get the table object
         table_object = self._client.get_table(table_reference)
+        
+        schema_fields_json = []
+        for field in table_object.schema:
+            schema_field_dict = {
+                "name": field.name,
+                "type": field.field_type,
+                "mode": field.mode,
+                "description": field.description,
+                # Add other attributes as needed
+            }
+            schema_fields_json.append(schema_field_dict)
 
-        # Get the schema in JSON format
-        schema_json = table_object.schema
-        return schema_json
+        return schema_fields_json

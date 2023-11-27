@@ -8,4 +8,4 @@ table1, table2 = Table.get_tables_from_config(config_key)
 schema1 = bigquery_client.get_schema(table1)
 schema2 = bigquery_client.get_schema(table2)
 
-output = compare_schemas(schema1, schema2)
+common_columns, similar_columns, uncommon_columns = compare_schemas(schema1, schema2)
