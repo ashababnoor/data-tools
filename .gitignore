@@ -123,3 +123,4 @@ GitHub.sublime-settings
 # Project Specific
 foo*
 data/
+output/
