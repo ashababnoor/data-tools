@@ -11,6 +11,9 @@ class Table:
     dataset_id: str
     table_id: str
     
+    def get_table_id(self):
+        return f"{self.project_id}.{self.dataset_id}.{self.table_id}"
+    
     @staticmethod
     def get_tables_from_config(config_key: str, config_file_path: str = None) -> Tuple['Table']:
         config = Config(file_path=config_file_path)
