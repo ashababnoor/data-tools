@@ -1,4 +1,8 @@
-from fuzzywuzzy import fuzz
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    from fuzzywuzzy import fuzz
+
 import csv
 import os
 from helper import Table, Schema
@@ -13,6 +17,8 @@ def compare_schemas(
     uncommon_file: str = "uncommon_columns.csv",
     output_folder: str = "output"
 ) -> tuple:
+    FUZZY_MATCH_RATIO: int = 80
+    
     common_columns = []
     similar_columns = []
     uncommon_columns = []
@@ -26,7 +32,7 @@ def compare_schemas(
         for col2 in schema2.schema:
             if col1.name == col2.name and col1.field_type == col2.field_type:
                 common_columns.append((col1.name, col1.field_type))
-            elif col1.field_type == col2.field_type and fuzz.ratio(col1.name, col2.name) > 80:
+            elif col1.field_type == col2.field_type and fuzz.ratio(col1.name, col2.name) > FUZZY_MATCH_RATIO:
                 similar_columns.append((col1.name, col2.name, col1.field_type))
     
     # Find uncommon columns
