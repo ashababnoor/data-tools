@@ -1,17 +1,18 @@
 from fuzzywuzzy import fuzz
 import csv
 import os
+from helper import Schema
 
 
 def compare_schemas(
-    schema1, 
-    schema2, 
-    save_in_file=True, 
-    common_file="common_columns.csv", 
-    similar_file="similar_columns.csv", 
-    uncommon_file="uncommon_columns.csv",
-    output_folder="output"
-):
+    schema1: Schema, 
+    schema2: Schema, 
+    save_in_file: bool = True, 
+    common_file: str = "common_columns.csv", 
+    similar_file: str = "similar_columns.csv", 
+    uncommon_file: str = "uncommon_columns.csv",
+    output_folder: str = "output"
+) -> tuple:
     common_columns = []
     similar_columns = []
     uncommon_columns = []

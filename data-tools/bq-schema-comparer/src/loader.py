@@ -3,15 +3,15 @@ from helper import Table, Schema
 
 
 class Bigquery:
-    def __init__(self, google_cred):
+    def __init__(self, google_cred: str):
         self._client = Bigquery._get_connection(google_cred)
 
-    def execute(self, query):
+    def execute(self, query: str):
         for row in self._client.query(query):
             yield row
 
     @staticmethod
-    def _get_connection(cred):
+    def _get_connection(cred: str) -> bigquery.Client:
         if cred is not None:
             import os
 
@@ -37,16 +37,3 @@ class Bigquery:
             table_id=table.table_id,
             schema=table_object.schema
         )
-        
-        schema_fields_json = []
-        for field in table_object.schema:
-            schema_field_dict = {
-                "name": field.name,
-                "type": field.field_type,
-                "mode": field.mode,
-                "description": field.description,
-                # Add other attributes as needed
-            }
-            schema_fields_json.append(schema_field_dict)
-
-        return schema_fields_json
