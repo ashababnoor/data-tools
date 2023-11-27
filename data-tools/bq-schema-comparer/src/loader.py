@@ -1,5 +1,6 @@
 from google.cloud import bigquery
-from helper import Table
+from helper import Table, Schema
+
 
 class Bigquery:
     def __init__(self, google_cred):
@@ -29,6 +30,13 @@ class Bigquery:
         
         # Get the table object
         table_object = self._client.get_table(table_reference)
+        
+        return Schema(
+            project_id=table.project_id,
+            dataset_id=table.dataset_id,
+            table_id=table.table_id,
+            schema=table_object.schema
+        )
         
         schema_fields_json = []
         for field in table_object.schema:
