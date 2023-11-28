@@ -14,7 +14,7 @@ def _csv_to_markdown(csv_file: str) -> str:
     """
     data = []
     
-    # Read JSON data from file
+    # Read CSV data from file
     with open(csv_file, 'r') as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:
