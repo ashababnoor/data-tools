@@ -14,11 +14,11 @@ def prettify_markdown_table(markdown_table: str) -> str:
     Example:
     ```
     >>> prettify_markdown_table(markdown_input = \"\"\"
-        | Name  | Age | City    | 
-        |-------|-----|---------|   
+        | Name | Age | City | 
+        |---|---|---|   
         | Alice | 25  | New York|   
-        | Bob   | 30  | London  |   
-        | Carol | 22  | Paris   |   
+        | Bob | 30 | London |   
+        | Carol | 22 | Paris |   
     \"\"\")
     
     | Name   |   Age | City     |
