@@ -2,6 +2,15 @@ from typing import Any
 
 
 def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
+    """
+    Converts list of dictionaries into Markdown format table
+
+    Args:
+        list_of_dict (list[dict[str, Any]]): List of dictionaries
+
+    Returns:
+        str: Converted markdown table
+    """
     markdown_table = ""
     
     # Extract headers from the first dictionary
@@ -22,6 +31,15 @@ def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
 
 
 def _list_of_list_to_markdown(list_of_list: list[list[Any]]) -> str:
+    """
+    Converts list of lists into Markdown format table
+
+    Args:
+        list_of_list (list[list[Any]]): List of lists
+
+    Returns:
+        str: Converted markdown table
+    """
     list_of_list = [
         [element.strip() for element in _list] 
         for _list in list_of_list
