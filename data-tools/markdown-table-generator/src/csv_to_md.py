@@ -1,9 +1,8 @@
 import csv
-import sys
 from tabulate import tabulate
 
 
-def csv_to_markdown(csv_file: str) -> str:
+def _csv_to_markdown(csv_file: str) -> str:
     """
     Convert table data in CSV format to Markdown table
 
@@ -27,7 +26,7 @@ def csv_to_markdown(csv_file: str) -> str:
 
 
 def main():
-    md_table = csv_to_markdown('data/input.csv')
+    md_table = _csv_to_markdown('data/input.csv')
     print(md_table)
     
 if __name__ == "__main__":

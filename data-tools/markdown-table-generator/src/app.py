@@ -1,8 +1,8 @@
 import os
 import sys
 from typing import Union
-from json_to_md import json_to_markdown
-from csv_to_md import csv_to_markdown
+from json_to_md import _json_to_markdown
+from csv_to_md import _csv_to_markdown
 
 
 ACCEPTED_EXTENSIONS = ['json', 'csv']
@@ -45,9 +45,9 @@ def generate_markdown(input_file: str, save_in_file: bool = True, output_file: U
     
     markdown_table = ""
     if input_file_extension.lower() == "json":
-         markdown_table = json_to_markdown(json_file=input_file)
+         markdown_table = _json_to_markdown(json_file=input_file)
     elif input_file_extension.lower() == "csv":
-         markdown_table = csv_to_markdown(csv_file=input_file)
+         markdown_table = _csv_to_markdown(csv_file=input_file)
 
 
     if not save_in_file:

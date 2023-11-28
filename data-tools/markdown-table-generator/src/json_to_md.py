@@ -3,7 +3,7 @@ import sys
 from tabulate import tabulate
 
 
-def json_to_markdown(json_file: str) -> str:
+def _json_to_markdown(json_file: str) -> str:
     """
     Convert list of dictionaries in JSON format to Markdown table
 
@@ -29,7 +29,7 @@ def json_to_markdown(json_file: str) -> str:
 
 
 def main():
-    md_table = json_to_markdown('data/input.json')
+    md_table = _json_to_markdown('data/input.json')
     print(md_table)
     
 if __name__ == "__main__":
