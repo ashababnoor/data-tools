@@ -18,7 +18,7 @@ def generate_markdown(input_file: str, save_in_file: bool = True, output_file: U
         print(f"Error: Input file type is unsupported")
         print(f"Input file: {input_file}")
         print()
-        print(f"Supported file types: {', '.join(ACCEPTED_EXTENSIONS)}")
+        print(f"Supported file types: {', '.join(ACCEPTED_EXTENSIONS).upper()}")
         sys.exit()
     
     if output_file is None:
