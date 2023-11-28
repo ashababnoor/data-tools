@@ -1,5 +1,6 @@
-import csv
 from tabulate import tabulate
+import csv
+import sys
 
 
 def _csv_to_markdown(csv_file: str) -> str:
@@ -19,6 +20,13 @@ def _csv_to_markdown(csv_file: str) -> str:
         csv_reader = csv.reader(file)
         for row in csv_reader:
             data.append(row)
+    
+    # Check if all lists are the same size
+    sizes = set(len(row) for row in data)
+    same_size = len(sizes) == 1
+    if not same_size:
+        print("Error: Input CSV data should have list of lists where all lists are the same size")
+        sys.exit()
     
     md_table = tabulate(data, headers="firstrow", tablefmt="pipe")
     

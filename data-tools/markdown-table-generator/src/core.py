@@ -2,7 +2,7 @@ from typing import Any
 import sys
 
 
-def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
+def _list_of_dict_to_markdown(list_of_dicts: list[dict[str, Any]]) -> str:
     """
     Converts list of dictionaries into Markdown format table
 
@@ -14,23 +14,23 @@ def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
     """
     
     # Check if all dictionaries have the same number of keys
-    sizes = set(len(row) for row in list_of_dict)
+    sizes = set(len(row) for row in list_of_dicts)
     same_size = len(sizes) == 1
     if not same_size:
-        print("Error: Input data should have list of dictionaries where all dictionaries of same size")
+        print("Error: Input data should have list of dictionaries where all dictionaries are the same size")
         sys.exit()
-    
+
     # Check if all dictionaries have the same keys
-    all_keys = [set(row.keys()) for row in list_of_dict]
+    all_keys = [set(row.keys()) for row in list_of_dicts]
     same_keys = all(all_keys[0] == keys for keys in all_keys[1:])
     if not same_keys:
-        print("Error: Input data should have list of dictionaries where all dictionaries have same keys")
+        print("Error: Input data should have list of dictionaries where all dictionaries have the same keys")
         sys.exit()
     
     markdown_table = ""
     
     # Extract headers from the first dictionary
-    headers = list(list_of_dict[0].keys())
+    headers = list(list_of_dicts[0].keys())
     
     # Adding table header
     markdown_table += f"| {' | '.join(headers)} |\n"
@@ -39,14 +39,14 @@ def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
     markdown_table += f"| {' | '.join(['---' for _ in headers])} |\n"
     
     # Adding table rows
-    for _dict in list_of_dict:
+    for _dict in list_of_dicts:
         row = [str(_dict[header]) for header in headers]
         markdown_table += f"| {' | '.join(row)} |\n"
     
     return markdown_table
 
 
-def _list_of_list_to_markdown(list_of_list: list[list[Any]]) -> str:
+def _list_of_list_to_markdown(list_of_lists: list[list[Any]]) -> str:
     """
     Converts list of lists into Markdown format table
 
@@ -56,14 +56,21 @@ def _list_of_list_to_markdown(list_of_list: list[list[Any]]) -> str:
     Returns:
         str: Converted markdown table
     """
-    list_of_list = [
+    # Check if all lists are the same size
+    sizes = set(len(row) for row in list_of_lists)
+    same_size = len(sizes) == 1
+    if not same_size:
+        print("Error: Input data should have list of lists where all lists are the same size")
+        sys.exit()
+    
+    list_of_lists = [
         [element.strip() for element in _list] 
-        for _list in list_of_list
+        for _list in list_of_lists
     ]
     markdown_table = ""
     
     # Extract headers from the first list
-    headers = list_of_list.pop(0)
+    headers = list_of_lists.pop(0)
     
     # Adding table header
     markdown_table += f"| {' | '.join(headers)} |\n"
@@ -72,7 +79,7 @@ def _list_of_list_to_markdown(list_of_list: list[list[Any]]) -> str:
     markdown_table += f"| {' | '.join(['---' for _ in headers])} |\n"
     
     # Adding table rows
-    for row in list_of_list:
+    for row in list_of_lists:
         markdown_table += f"| {' | '.join(row)} |\n"
     
     return markdown_table

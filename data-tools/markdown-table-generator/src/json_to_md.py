@@ -1,6 +1,6 @@
+from tabulate import tabulate
 import json
 import sys
-from tabulate import tabulate
 
 
 def _json_to_markdown(json_file: str) -> str:
@@ -27,14 +27,14 @@ def _json_to_markdown(json_file: str) -> str:
     sizes = set(len(row) for row in data)
     same_size = len(sizes) == 1
     if not same_size:
-        print("Error: Input JSON data should have list of dictionaries where all dictionaries of same size")
+        print("Error: Input JSON data should have list of dictionaries where all dictionaries are the same size")
         sys.exit()
 
     # Check if all dictionaries have the same keys
     all_keys = [set(row.keys()) for row in data]
     same_keys = all(all_keys[0] == keys for keys in all_keys[1:])
     if not same_keys:
-        print("Error: Input JSON data should have list of dictionaries where all dictionaries have same keys")
+        print("Error: Input JSON data should have list of dictionaries where all dictionaries have the same keys")
         sys.exit()
     
     md_table = tabulate(data, headers="keys", tablefmt="pipe")
