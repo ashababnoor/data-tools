@@ -1,4 +1,5 @@
 from typing import Any
+import sys
 
 
 def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
@@ -11,6 +12,21 @@ def _list_of_dict_to_markdown(list_of_dict: list[dict[str, Any]]) -> str:
     Returns:
         str: Converted markdown table
     """
+    
+    # Check if all dictionaries have the same number of keys
+    sizes = set(len(row) for row in list_of_dict)
+    same_size = len(sizes) == 1
+    if not same_size:
+        print("Error: Input data should have list of dictionaries where all dictionaries of same size")
+        sys.exit()
+    
+    # Check if all dictionaries have the same keys
+    all_keys = [set(row.keys()) for row in list_of_dict]
+    same_keys = all(all_keys[0] == keys for keys in all_keys[1:])
+    if not same_keys:
+        print("Error: Input data should have list of dictionaries where all dictionaries have same keys")
+        sys.exit()
+    
     markdown_table = ""
     
     # Extract headers from the first dictionary

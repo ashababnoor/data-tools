@@ -20,7 +20,21 @@ def _json_to_markdown(json_file: str) -> str:
     
     # Check if data is a list of dictionaries
     if not isinstance(data, list) or not all(isinstance(item, dict) for item in data):
-        print("Error: Input JSON data should be a list of dictionaries.")
+        print("Error: Input JSON data should be a list of dictionaries")
+        sys.exit()
+    
+    # Check if all dictionaries have the same number of keys
+    sizes = set(len(row) for row in data)
+    same_size = len(sizes) == 1
+    if not same_size:
+        print("Error: Input JSON data should have list of dictionaries where all dictionaries of same size")
+        sys.exit()
+
+    # Check if all dictionaries have the same keys
+    all_keys = [set(row.keys()) for row in data]
+    same_keys = all(all_keys[0] == keys for keys in all_keys[1:])
+    if not same_keys:
+        print("Error: Input JSON data should have list of dictionaries where all dictionaries have same keys")
         sys.exit()
     
     md_table = tabulate(data, headers="keys", tablefmt="pipe")
