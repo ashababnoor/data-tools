@@ -4,6 +4,15 @@ from tabulate import tabulate
 
 
 def csv_to_markdown(csv_file: str) -> str:
+    """
+    Convert table data in CSV format to Markdown table
+
+    Args:
+        csv_file (str): Path of input file containing CSV table data
+
+    Returns:
+        str: Converted markdown table
+    """
     data = []
     
     # Read JSON data from file
