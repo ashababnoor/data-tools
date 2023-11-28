@@ -7,7 +7,18 @@ from csv_to_md import csv_to_markdown
 
 ACCEPTED_EXTENSIONS = ['json', 'csv']
 
-def generate_markdown(input_file: str, save_in_file: bool = True, output_file: Union[str, None] = None) -> None:
+def generate_markdown(input_file: str, save_in_file: bool = True, output_file: Union[str, None] = None) -> str:
+    """
+    Generate markdown table from file
+
+    Args:
+        input_file (str): File path of input file
+        save_in_file (bool, optional): Whether output should be saved in a file or not. Defaults to True.
+        output_file (str | None, optional): File path of output file. Defaults to None and auto-generates path based on input file path.
+
+    Returns:
+        str: Converted markdown table
+    """
     INPUT_FILE_NAMES_TO_BE_CHANGED = ['input']
     
     if not os.path.exists(input_file):
