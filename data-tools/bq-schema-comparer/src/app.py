@@ -1,12 +1,13 @@
+from typing import Union
 from dependency_injector import bigquery_client
 from comparer import compare_schemas, generate_summary
 from helper import Table
 import os
 
 
-def compare(config_key: str, output_folder: str = "output") -> None:
+def compare(config_key: str, output_folder: str = "output", config_file: Union[str, None] = None) -> None:
     print(f"Performing schema comparison for config key: {config_key}")
-    table1, table2 = Table.get_tables_from_config(config_key)
+    table1, table2 = Table.get_tables_from_config(config_key, config_file_path=config_file)
     print(f"    Table 1: `{table1.get_table_id()}`")
     print(f"    Table 2: `{table2.get_table_id()}`")
     print()
@@ -26,7 +27,7 @@ def compare(config_key: str, output_folder: str = "output") -> None:
 
 
 def main():
-    config_key = ""
+    config_key = "food_tables"
     compare(config_key)
 
 
